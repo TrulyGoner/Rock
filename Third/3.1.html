@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Users</title>
+</head>
+<body>
+    <h1>Список пользователей</h1>
+    <div id="loading">Загрузка...</div>
+    <ul id="user-list"></ul>                                                
+
+    <script>                                                                //Для работы с браузером
+        function fetchRandomUsers() {                                       //Функция для получения данных
+            const url = "https://randomuser.me/api/?results=10";            //URL нужной API
+            const loadingElement = document.getElementById("loading");
+            const userList = document.getElementById("user-list");
+
+            loadingElement.textContent = "Загрузка...";
+            userList.innerHTML = "";
+
+            fetch(url)
+                .then(response => {                                         //Проверка на успешность запроса
+                    if (!response.ok) {
+                        throw new Error("Ошибка сети");                     //Ошибка, если с сетью что-то не так
+                    }
+                    return response.json();                                 //Преобразуем ответ в формат JSON
+                })
+                .then(data => {
+                    const users = data.results;
+
+                    loadingElement.textContent = "";
+
+                    users.forEach(user => {                                 //Отображение пользователей
+                        const li = document.createElement("li");
+                        li.innerHTML = `
+                            <img src="${user.picture.thumbnail}" alt="Фото ${user.name.first}" />
+                            <p><strong>${user.name.first} ${user.name.last}</strong></p>
+                            <p>Email: ${user.email}</p>
+                        `;
+                        userList.appendChild(li);
+                    });
+                })
+                .catch(error => {                                           //Если возникла ошибка
+                    loadingElement.textContent = "Не удалось загрузить пользователей.";
+                    console.error("Ошибка:", error);
+                });
+        }
+
+
+        fetchRandomUsers();
+    </script>
+</body>
+</html>
