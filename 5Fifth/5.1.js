@@ -8,3 +8,14 @@ function debounce(func, delay) {
         }, delay);
     };
 }
+const debouncedFunction = debounce(() => {      //Пример работы
+    console.log('Вызвана функция с задержкой');
+    }, 7000);
+debouncedFunction();
+debouncedFunction();                            // Этот вызов должен сбросить таймер и предотвратить мгновенный вызов функции.
+
+const debouncedFunction1 = debounce(() => {     //Пример работы
+    console.log('Задежка 15 сек');
+    }, 15000);
+debouncedFunction1();
+debouncedFunction1();
