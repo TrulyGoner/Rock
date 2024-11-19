@@ -6,16 +6,15 @@
     <title>Random Users</title>
 </head>
 <body>
-    <h1>Список пользователей</h1>
+    <h1>Список пользователей</h1>                                            <!--Отображение процесса загрузки-->
     <div id="loading">Загрузка...</div>
     <ul id="user-list"></ul>                                                
 
-    <script>                                                                //Для работы с браузером
+    <script>                                                                
         function fetchRandomUsers() {                                       //Функция для получения данных
-            const url = "https://randomuser.me/api/?results=10";            //URL нужной API
+            const url = "https://randomuser.me/api/?results=10";            //URL нужной API, определение количества в 10 пользоваталей
             const loadingElement = document.getElementById("loading");
             const userList = document.getElementById("user-list");
-
             loadingElement.textContent = "Загрузка...";
             userList.innerHTML = "";
 
@@ -28,7 +27,6 @@
                 })
                 .then(data => {
                     const users = data.results;
-
                     loadingElement.textContent = "";
 
                     users.forEach(user => {                                 //Отображение пользователей
@@ -41,7 +39,7 @@
                         userList.appendChild(li);
                     });
                 })
-                .catch(error => {                                           //Если возникла ошибка
+                .catch(error => {                                           //Если возникла ошибка 
                     loadingElement.textContent = "Не удалось загрузить пользователей.";
                     console.error("Ошибка:", error);
                 });

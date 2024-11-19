@@ -9,3 +9,4 @@ console.log(isPalindrome("А роза упала на лапу Азора"));   
 console.log(isPalindrome("Привет"));
 console.log(isPalindrome(5995));
 console.log(isPalindrome(5935));
+
